@@ -34,4 +34,4 @@ class Comment(Base):
     post: Mapped["Post"] = relationship(back_populates="comments")
 
     def __repr__(self):
-        return f"{self.user} comentou {self.comment[:140]}... no {self.post.__repr__()}"
+        return f"@{self.user} comentou: {self.comment[:140]}... no post {self.post.__repr__()}"
