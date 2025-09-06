@@ -10,13 +10,14 @@ class Base(DeclarativeBase):
 class Post(Base):
     __tablename__ = "posts"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    link: Mapped[str] = mapped_column(String(50), unique=True)
     nome_portal: Mapped[str] = mapped_column(String(15))
     texto_postagem: Mapped[str] = mapped_column()
     comments: Mapped[List["Comment"]] = relationship(back_populates="post")
 
     def __repr__(self):
-        return f"[Post {self.id}] @{self.nome_portal}: {self.texto_postagem[:140]}..."
+        return f"[Post {self.id}] @{self.nome_portal}: {self.texto_postagem[:140]}... link [{self.link}]"
 
 
 
