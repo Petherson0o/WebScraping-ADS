@@ -1,8 +1,8 @@
 from db import engine, Session
 from Models import models
 
-postagem = models.Post(id=3, texto_postagem="Texto da postagem asdasd", nome_portal="Portal notícias 2 ")
-comment = models.Comment(id=1, post_id = 5, comment="comentario da postagem", user="usuario")
+postagem = models.Post(id=3, link="www.link.com" ,texto_postagem="Texto da postagem asdasd", nome_portal="Portal notícias 2 ")
+comment = models.Comment(id=1, post_id = 3, comment="comentario da postagem", user="usuario")
 print(comment)
 
 

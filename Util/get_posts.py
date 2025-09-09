@@ -54,6 +54,7 @@ print(f"\nTotal de tweets coletados: {len(twt_dict)}")
 from Models.db import Session
 from Models.models import Post
 
+
 session = Session()
 for key, value in twt_dict.items():
     try:
@@ -61,7 +62,6 @@ for key, value in twt_dict.items():
         session.add(post)
         session.commit()
         print("Tweet cadastrado no BD")
-        # driver.get(key)
     except Exception as e:
         session.rollback()
         print(f"Erro: {e}")

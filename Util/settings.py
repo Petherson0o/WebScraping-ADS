@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# DB_PATH =
+
 # url das páginas
 ROOT_PATH: str = "https://x.com/" # Url home
 ROOT_PATH_LOGIN: str = "https://x.com/i/flow/login" # Url de login

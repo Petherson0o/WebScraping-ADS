@@ -7,6 +7,7 @@ class Base(DeclarativeBase):
     pass
 
 
+# Postagens do Twitter
 class Post(Base):
     __tablename__ = "posts"
 
@@ -20,7 +21,7 @@ class Post(Base):
         return f"[Post {self.id}] @{self.nome_portal}: {self.texto_postagem[:140]}... link [{self.link}]"
 
 
-
+# Comentários das Postagens
 class Comment(Base):
     __tablename__ = "comments"
 
