@@ -1,5 +1,4 @@
 from selenium.webdriver.remote.webelement import WebElement
-from Util.settings import ROOT_PATH, URI_PATH
 from Util.login import login_in_x
 
 
