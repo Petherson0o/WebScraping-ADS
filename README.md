@@ -23,7 +23,7 @@ Requisitos:
 |---------------|:-----------------------------------:|
 | João Sampaio  | [JSampx](https://github.com/JSampx) |
 | Antonio Lima  | 
-| Kayan Ribeiro | 
+| Kayan Ribeiro | [kayanRibeiro](https://github.com/kayanRibeiro)
 | Marcos Felipe |
 | Melissa Medeiros |
 | Petherson |
