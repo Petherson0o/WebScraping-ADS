@@ -1,6 +1,6 @@
-from selenium.webdriver.remote.webelement import WebElement
-
-from Util.settings import ROOT_PATH, URI_PATH
+from Models.db import Session
+from Models.models import Post
+from Util.settings import ROOT_PATH, URI_PATH, SCROLL_STEP
 from Util.login import login_in_x
 
 from selenium.webdriver.common.by import By
@@ -9,8 +9,6 @@ import time
 
 driver = login_in_x()
 
-pixels_por_linha = 60
-scroll_step = 3 * pixels_por_linha
 
 # Chrome options
 chrome_options = Options()
@@ -24,41 +22,41 @@ twt_dict = {}
 # Loop para capturar 30 tweets
 while len(twt_dict) < 30:
     # Rola a página
-    driver.execute_script(f"window.scrollBy(0, {scroll_step});")
+    driver.execute_script(f"window.scrollBy(0, {SCROLL_STEP});")
     time.sleep(1)
-
+    tweet_xpath = "//article[@data-testid='tweet']"
+    tweet_xpath_text = ".//div[@data-testid='tweetText']"
+    tweet_xpath_href = ".//a[contains(@href, '/status/')]"
     # Captura tweets visíveis
-    elements: list[WebElement] = driver.find_elements(By.XPATH, "//article[@data-testid='tweet']")
+    elements = (driver.find_elements(By.XPATH, tweet_xpath))
 
     for e in elements:
         try:
             # Texto do tweet (ignora elementos sem texto)
             try:
-                text_divs = e.find_element(By.XPATH, ".//div[@data-testid='tweetText']").text
+                text_divs = e.find_element(By.XPATH, tweet_xpath_text).text
             except:
                 text_divs = ""
 
             # Link do tweet
-            link = e.find_element(By.XPATH, ".//a[contains(@href, '/status/')]").get_attribute("href")
+            link = (e.find_element(By.XPATH, tweet_xpath_href)
+                    .get_attribute("href"))
 
             # Evita duplicados
             if link not in twt_dict:
                 twt_dict[link] = text_divs
-                print(f"[{len(twt_dict)}] {link} -> {text_divs[:50]}...")  # preview do texto
+                # preview do texto
+                print(f"[{len(twt_dict)}] {link} -> {text_divs[:50]}...")
         except Exception as ex:
             print("Erro ao processar tweet:", ex)
 
 print(f"\nTotal de tweets coletados: {len(twt_dict)}")
 
 
-from Models.db import Session
-from Models.models import Post
-
-
 session = Session()
 for key, value in twt_dict.items():
     try:
-        post = Post(link=key, nome_portal=URI_PATH ,texto_postagem=value)
+        post = Post(link=key, nome_portal=URI_PATH, texto_postagem=value)
         session.add(post)
         session.commit()
         print("Tweet cadastrado no BD")

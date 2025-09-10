@@ -1,14 +1,14 @@
 from selenium.webdriver.remote.webelement import WebElement
+from Models.db import Session
+from Models.models import Post, Comment
 from Util.login import login_in_x
+from Util.settings import SCROLL_STEP
 
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 
-
-from Models.db import Session
-from Models.models import Post
 
 session = Session()
 post: Post
@@ -24,9 +24,6 @@ except Exception as e:
 driver = login_in_x()
 
 
-pixels_por_linha = 60
-scroll_step = 3 * pixels_por_linha
-
 # Chrome options
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
@@ -39,7 +36,7 @@ comment_dict = {}
 # Loop para capturar 30 tweets
 while len(comment_dict) < 30:
     # Rola a página
-    driver.execute_script(f"window.scrollBy(0, {scroll_step});")
+    driver.execute_script(f"window.scrollBy(0, {SCROLL_STEP});")
     time.sleep(1)
 
     # Captura tweets visíveis
@@ -66,11 +63,6 @@ while len(comment_dict) < 30:
 print(f"\nTotal de tweets coletados: {len(comment_dict)}")
 
 
-
-from Models.db import Session
-from Models.models import Comment
-
-session = Session()
 for key, value in comment_dict.items():
     try:
         comment = Comment(user=key, comment=value, post_id=post.link)

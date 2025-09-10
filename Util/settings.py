@@ -16,3 +16,6 @@ URI_PATH: str = "g1" # @id da conta do Twitter
 EMAIL_ACCOUNT: str = os.getenv("EMAIL_ACCOUNT")
 USER_ACCOUNT: str = os.getenv("USER_ACCOUNT")
 USER_PASSWORD: str = os.getenv("USER_PASSWORD")
+
+PIXELS_PER_LINE = 60
+SCROLL_STEP = 3 * PIXELS_PER_LINE
