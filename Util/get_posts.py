@@ -35,7 +35,8 @@ while len(twt_dict) < 30:
             # Texto do tweet (ignora elementos sem texto)
             try:
                 text_divs = e.find_element(By.XPATH, tweet_xpath_text).text
-            except:
+            except Exception as e:
+                print(f"Erro: {e}")
                 text_divs = ""
 
             # Link do tweet
