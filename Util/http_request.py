@@ -1,3 +1,7 @@
+'''
+Script para requisções em API Rest
+'''
+
 import requests
 from bs4 import BeautifulSoup
 

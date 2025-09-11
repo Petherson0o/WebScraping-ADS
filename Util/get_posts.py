@@ -1,6 +1,6 @@
 from Models.db import Session
 from Models.models import Post
-from Util.settings import ROOT_PATH, URI_PATH, SCROLL_STEP
+from Util.settings import ROOT_PATH, URI_PATH, SCROLL_STEP, PERSIST_TWT
 from Util.login import login_in_x
 
 from selenium.webdriver.common.by import By
@@ -54,14 +54,16 @@ print(f"\nTotal de tweets coletados: {len(twt_dict)}")
 
 
 session = Session()
-for key, value in twt_dict.items():
-    try:
-        post = Post(link=key, nome_portal=URI_PATH, texto_postagem=value)
-        session.add(post)
-        session.commit()
-        print("Tweet cadastrado no BD")
-    except Exception as e:
-        session.rollback()
-        print(f"Erro: {e}")
-    finally:
-        session.close()
+
+if PERSIST_TWT:
+    for key, value in twt_dict.items():
+        try:
+            post = Post(link=key, nome_portal=URI_PATH, texto_postagem=value)
+            session.add(post)
+            session.commit()
+            print("Tweet cadastrado no BD")
+        except Exception as e:
+            session.rollback()
+            print(f"Erro: {e}")
+        finally:
+            session.close()

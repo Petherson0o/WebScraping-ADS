@@ -1,3 +1,5 @@
+import os
+
 from Util.settings import ROOT_PATH_LOGIN, EMAIL_ACCOUNT, USER_ACCOUNT, USER_PASSWORD
 
 from selenium import webdriver
@@ -12,6 +14,13 @@ import time
 def login_in_x():
     # Chrome options5
     chrome_options = Options()
+    if os.name == "posix": # verifica se o Sistema Operacional é Linux
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--remote-debugging-port=9222")
+        # chrome_options.add_argument("--headless=new")  # use se não quiser abrir janela
+
     chrome_options.add_experimental_option("detach", True)
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
