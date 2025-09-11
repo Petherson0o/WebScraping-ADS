@@ -22,8 +22,8 @@ Requisitos:
 | Nome          |               GitHub                |
 |---------------|:-----------------------------------:|
 | João Sampaio  | [JSampx](https://github.com/JSampx) |
-| Antonio Lima  | 
+| Antonio Lima  | [antoniomariacln](https://github.com/antoniomariacln)
 | Kayan Ribeiro | [kayanRibeiro](https://github.com/kayanRibeiro)
-| Marcos Felipe |
-| Melissa Medeiros |
-| Petherson |
+| Marcos Felipe |[MFelipe-codagens ](https://github.com/MFelipe-codagens)
+| Melissa Medeiros | [melissamedeiros-doc](https://github.com/melissamedeiros-doc)
+| Petherson | [Petherson0o](https://github.com/Petherson0o)
